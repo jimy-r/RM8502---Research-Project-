@@ -1,0 +1,21 @@
+# --- Core Blockchain and Cryptography Libraries ---
+# Used for interacting with the Anvil EVM node and handling transactions
+web3
+# Used for creating and verifying the elliptic curve digital signatures for provenance
+ecdsa
+
+# --- Data Handling and Statistical Analysis ---
+# Used to structure and analyze the simulation results in a DataFrame
+pandas
+# Core library for numerical operations, a dependency for pandas and scipy
+numpy
+# Used for the statistical validation (t-tests, confidence intervals) of the metrics
+scipy
+
+# --- Data Visualization ---
+# Used to create plots (histograms, boxplots) for the final report
+matplotlib
+
+# --- Development and Reporting Environment ---
+# Required to run the analysis.ipynb notebook for results processing
+jupyter
