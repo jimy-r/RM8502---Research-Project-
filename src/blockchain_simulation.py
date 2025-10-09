@@ -26,7 +26,7 @@ from agent import Agent, verify_signature
 from web3 import Web3
 
 # --- Blockchain Connection Setup ---
-anvil_url = "http://12T7.0.0.1:8545"
+anvil_url = "http://127.0.0.1:8545"
 w3 = Web3(Web3.HTTPProvider(anvil_url))
 if not w3.is_connected():
     print(f"FATAL: Could not connect to Anvil at {anvil_url}")
