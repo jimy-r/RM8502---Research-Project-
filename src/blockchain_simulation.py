@@ -33,6 +33,7 @@ if not w3.is_connected():
     exit()
 
 # --- Smart Contract Details ---
+# IMPORTANT: Update with your real deployed contract address.
 CONTRACT_ADDRESS = "0x5FbDB2315678afecb367f032d93F642f64180aa3"
 CONTRACT_ABI_JSON = """
 [{"type":"function","name":"addEntry","inputs":[{"name":"_agentAddress","type":"string","internalType":"string"},{"name":"_content","type":"string","internalType":"string"},{"name":"_signature","type":"string","internalType":"string"}],"outputs":[],"stateMutability":"nonpayable"},{"type":"event","name":"EntryAdded","inputs":[{"name":"timestamp","type":"uint256","indexed":true,"internalType":"uint256"},{"name":"agentAddress","type":"string","indexed":false,"internalType":"string"},{"name":"content","type":"string","indexed":false,"internalType":"string"},{"name":"signature","type":"string","indexed":false,"internalType":"string"}],"anonymous":false}]
@@ -115,9 +116,9 @@ def run_live_simulation(num_entries: int, payload_template: dict) -> Dict:
         'gas_costs': gas_costs
     }
 
-# --- Metric Calculation and Analysis ---
+# --- Metric Calculation and Analysis (Updated to remove omitted metrics) ---
 def calculate_live_metrics(simulation_data: Dict) -> Dict[str, float]:
-    """Calculates metrics, now including Average Gas Cost."""
+    """Calculates the metrics that were measured in the live experiment."""
     metrics = {}
     gas_costs = simulation_data.get('gas_costs', [])
     legit_results = simulation_data.get('legitimate_verification_results', [])
@@ -129,9 +130,7 @@ def calculate_live_metrics(simulation_data: Dict) -> Dict[str, float]:
     metrics['PVA'] = sum(legit_results) / len(legit_results) if legit_results else 1.0
     metrics['VL'] = np.mean(latencies) if latencies else 0.0
     metrics['TT'] = total_txs / duration if duration > 0 else 0.0
-    metrics['TDR'] = 1.0
-    metrics['FPR'] = 0.0
-    metrics['ACR'] = 1.0
+    
     return metrics
 
 def analyze_and_visualize_results(all_run_metrics: List[Dict], latencies_from_last_run: List[float], payload_name: str):
@@ -162,7 +161,8 @@ def analyze_and_visualize_results(all_run_metrics: List[Dict], latencies_from_la
             print("  -> RESULT: Fail to reject H0. PVA does not meet target.")
 
     print("\nGenerating and saving plots...")
-    df.plot(kind='box', subplots=True, layout=(3, 3), figsize=(18, 12), title=f"Distribution of Metrics ({payload_name.upper()} Payload)")
+    # UPDATED: Changed layout to a cleaner 2x2 grid for the 4 measured metrics.
+    df.plot(kind='box', subplots=True, layout=(2, 2), figsize=(12, 8), title=f"Distribution of Metrics ({payload_name.upper()} Payload)")
     plt.tight_layout()
     plt.savefig(f"live_metrics_boxplot_{payload_name}.png")
     print(f"  -> Saved 'live_metrics_boxplot_{payload_name}.png'")
@@ -186,6 +186,7 @@ def create_comparative_plots(final_results: Dict[str, pd.DataFrame]):
     print("CREATING COMPARATIVE PLOTS ACROSS ALL PAYLOAD SIZES")
     print(f"{'='*80}")
 
+    # This list correctly contains only the relevant, measured metrics for comparison.
     metrics_to_compare = ['AvgGas', 'TT', 'VL']
     
     for metric in metrics_to_compare:
@@ -210,8 +211,8 @@ def create_comparative_plots(final_results: Dict[str, pd.DataFrame]):
 # --- Main Execution Block ---
 if __name__ == "__main__":
     # Parameters for the final experiment run
-    T = 3   # Number of simulation runs for statistical significance
-    N = 50  # Number of transactions per run for steady-state measurement
+    T = 30   # Number of simulation runs for statistical significance
+    N = 500  # Number of transactions per run for steady-state measurement
     
     final_results = {}
 
