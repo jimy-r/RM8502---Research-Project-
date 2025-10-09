@@ -19,10 +19,10 @@ from typing import Dict, List
 import copy # Import the copy module for deep copying payloads
 
 # --- Import from other project files ---
-# Ensure you have agent.py in the same src/ folder
+# Ensure agent.py in the same src/ folder
 from agent import Agent, verify_signature
 
-# --- Import the REAL web3 library ---
+# --- Import web3 library ---
 from web3 import Web3
 
 # --- Blockchain Connection Setup ---
@@ -33,7 +33,6 @@ if not w3.is_connected():
     exit()
 
 # --- Smart Contract Details ---
-# IMPORTANT: Update with your real deployed contract address.
 CONTRACT_ADDRESS = "0x5FbDB2315678afecb367f032d93F642f64180aa3"
 CONTRACT_ABI_JSON = """
 [{"type":"function","name":"addEntry","inputs":[{"name":"_agentAddress","type":"string","internalType":"string"},{"name":"_content","type":"string","internalType":"string"},{"name":"_signature","type":"string","internalType":"string"}],"outputs":[],"stateMutability":"nonpayable"},{"type":"event","name":"EntryAdded","inputs":[{"name":"timestamp","type":"uint256","indexed":true,"internalType":"uint256"},{"name":"agentAddress","type":"string","indexed":false,"internalType":"string"},{"name":"content","type":"string","indexed":false,"internalType":"string"},{"name":"signature","type":"string","indexed":false,"internalType":"string"}],"anonymous":false}]
@@ -56,7 +55,7 @@ PAYLOADS = {
 }
 
 
-# --- Core Simulation Function (Updated to accept payload) ---
+# --- Core Simulation Function ---
 def run_live_simulation(num_entries: int, payload_template: dict) -> Dict:
     """
     Runs a simulation that interacts with a live Anvil blockchain, using a
@@ -211,8 +210,8 @@ def create_comparative_plots(final_results: Dict[str, pd.DataFrame]):
 # --- Main Execution Block ---
 if __name__ == "__main__":
     # Parameters for the final experiment run
-    T = 30   # Number of simulation runs for statistical significance
-    N = 500  # Number of transactions per run for steady-state measurement
+    T = 3   # Number of simulation runs for statistical significance
+    N = 50  # Number of transactions per run for steady-state measurement
     
     final_results = {}
 
