@@ -97,12 +97,10 @@ The success of this project is quantified by six key metrics, evaluated over T=1
 
 | Metric                          | Abbreviation | Target Value  |
 | ------------------------------- | ------------ | ------------- |
-| Provenance Verification Accuracy| PVA          | ≥ 99%         |
-| Tamper Detection Rate           | TDR          | ≥ 95%         |
-| False Positive Rate             | FPR          | ≤ 1%          |
-| Audit Completeness Ratio        | ACR          | ≥ 98%         |
+| Provenance Verification Accuracy| PVA          | ≥ 99%         |   
 | Verification Latency            | VL           | ≤ 150 ms      |
 | Transaction Throughput          | TT           | ≥ 100 txn/sec |
+| Average Gas Cost	          | AvgGas       | nan           |
 
 ## Project Structure
 ```
