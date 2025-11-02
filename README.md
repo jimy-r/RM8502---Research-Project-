@@ -100,7 +100,7 @@ The success of this project is quantified by six key metrics, evaluated over T=1
 | Provenance Verification Accuracy| PVA          | ≥ 99%         |   
 | Verification Latency            | VL           | ≤ 150 ms      |
 | Transaction Throughput          | TT           | ≥ 100 txn/sec |
-| Average Gas Cost	          | AvgGas       | nan           |
+| Average Gas Cost	              | AvgGas       | nan           |
 
 ## Project Structure
 ```
@@ -109,12 +109,9 @@ The success of this project is quantified by six key metrics, evaluated over T=1
 │ └── MemoryLedger.sol # Optional Solidity smart contract
 ├── data/
 │ └── simulation_results.csv # Output data from the simulation
-├── notebooks/
-│ └── analysis.ipynb # Jupyter notebook for statistical analysis
 ├── src/
 │ ├── agent.py # Agent class with signing logic
-│ ├── blockchain_utils.py # Helper functions for web3.py interaction
-│ └── simulation.py # Main script to run the experiment
+│ ├── blockchain_simulation.py # Main script to run the experiment 
 ├── .gitignore
 ├── README.md
 └── requirements.txt # Python dependencies
